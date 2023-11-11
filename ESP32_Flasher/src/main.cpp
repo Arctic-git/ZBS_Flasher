@@ -152,7 +152,7 @@ void handle_uart_cmd(uint8_t cmd, uint8_t *cmd_buff, uint8_t len)
     {
       spi_speed = 8000000;
     }
-    temp_buff[0] = zbs.begin(ZBS_SS, ZBS_CLK, ZBS_MoSi, ZBS_MiSo, ZBS_Reset, ZBS_POWER, 0, spi_speed);
+    temp_buff[0] = zbs.begin(ZBS_SS, ZBS_CLK, ZBS_MoSi, ZBS_MiSo, ZBS_Reset, ZBS_POWER, 1, spi_speed);
     send_uart_answer(cmd, temp_buff, 1);
     break;
   case CMD_RESET_ZBS:
@@ -213,7 +213,7 @@ void handle_uart_cmd(uint8_t cmd, uint8_t *cmd_buff, uint8_t len)
               zbs.write_flash((cmd_buff[1] << 8 | cmd_buff[2]) + i, cmd_buff[3 + i]);
               if (zbs.read_flash((cmd_buff[1] << 8 | cmd_buff[2]) + i) != cmd_buff[3 + i])
               {
-                temp_buff[0] = 0;
+                temp_buff[0] = 20;
                 send_uart_answer(cmd, temp_buff, 1);
                 break;
               }

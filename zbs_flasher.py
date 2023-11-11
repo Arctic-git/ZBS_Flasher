@@ -131,7 +131,7 @@ class ZBSFlasher:
             ]) + data
         )
         if response[0] != 1:
-            raise CommunicationError("Writing command returned an error")
+            raise CommunicationError("Writing command returned an error %d" % response[0])
 
     def erase_flash(self):
         return self._query(CMD_ERASE_FLASH)
